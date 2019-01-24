@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--mybatis的主要配置文件 -->
+<configuration>
+    <!--配置环境-->
+    <environments default="mysql">
+        <!--配置mysql环境-->
+        <environment id="mysql">
+            <!--配置事务的类型-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--配置数据源（连接池）-->
+            <dataSource type="POOLED">
+
+                <!--配置连接数据库的4个基本信息-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--指定映射配置文件的位置。映射文件指的是每个dao独立的配置文件-->
+    <!--/*  将UserDao中定义的接口使用注解
+        @Select("select * from user")
+          List<User> findAll();
+        然后在mybatis主要配置文件中的<mappers 将resource 换成class>配置
+       <mappers>  使用注解的话必须得这样写。UserDao.xml文件可以删除
+        <mapper class="com.itcase.dao.UserDao"/>
+      </mappers>
+    */-->
+    <mappers>
+        <mapper resource="com\itcase\dao\UserDao.xml"/>
+    </mappers>
+</configuration>
